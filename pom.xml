@@ -13,21 +13,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>price-service</name>
 	<description>Simple app to manage prices</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>21</java.version>
+		<openapi-generator.version>7.8.0</openapi-generator.version>
+		<springdoc.version>2.6.0</springdoc.version>
+		<swagger-core.version>2.2.23</swagger-core.version>
+		<code-generator.base-package>com.jeparca.inditex.priceservice</code-generator.base-package>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -60,6 +51,33 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- DEPENDENCIES FOR CODE GENERATION-->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.springdoc</groupId>
+		    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+		    <version>${springdoc.version}</version>
+		</dependency>
+	    <dependency>
+	      <groupId>org.springdoc</groupId>
+	      <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+          <version>${springdoc.version}</version>
+	    </dependency>
+
+		<dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-models</artifactId>
+            <version>${swagger-core.version}</version>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -75,6 +93,32 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>${openapi-generator.version}</version>
+				<executions>
+					<execution>
+						<id>eCommerceApiV1</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/api/ecommerce.v1.yml</inputSpec>
+							<output>${project.build.directory}/generated-sources</output>
+							<generatorName>spring</generatorName>
+							<modelNameSuffix>DTO</modelNameSuffix>
+							<skipIfSpecIsUnchanged>false</skipIfSpecIsUnchanged>
+							<skipOperationExample>true</skipOperationExample>
+							<generateSupportingFiles>false</generateSupportingFiles>
+							<openapiGeneratorIgnoreList>src/main/java/com/jeparca/inditex/priceservice/PriceServiceApplication.java</openapiGeneratorIgnoreList>
+							<apiPackage>${code-generator.base-package}.api.v1</apiPackage>
+							<modelPackage>${code-generator.base-package}.model.v1</modelPackage>
+							<configurationFile>${project.basedir}/src/main/resources/codeGeneration/spring-generator.config.json</configurationFile>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
