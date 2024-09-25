@@ -6,11 +6,11 @@ Price:
       format: int64
       example: 2
     productId:
-      type: number
+      type: integer
       format: int64
       example: 35455
     brandId:
-      type: number
+      type: integer
       format: int64
       example: 1
     startDate:

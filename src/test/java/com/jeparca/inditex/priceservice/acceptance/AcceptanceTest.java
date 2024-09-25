@@ -107,14 +107,14 @@ public class AcceptanceTest {
 		assertEquals(currency, this.price.getCurrency().getValue());
 	}
 
-	@Then("the brand id should be {int}")
-	public void brand_id_should_be(Integer brandId) throws Exception {
-		assertEquals(brandId, this.price.getBrandId().intValue());
+	@Then("the brand id should be {long}")
+	public void brand_id_should_be(Long brandId) throws Exception {
+		assertEquals(brandId, this.price.getBrandId());
 	}
 
-	@Then("the product id should be {int}")
-	public void product_id_should_be(Integer productId) throws Exception {
-		assertEquals(productId, this.price.getProductId().intValue());
+	@Then("the product id should be {long}")
+	public void product_id_should_be(Long productId) throws Exception {
+		assertEquals(productId, this.price.getProductId());
 	}
 
 	@Then("the price list should be {long}")

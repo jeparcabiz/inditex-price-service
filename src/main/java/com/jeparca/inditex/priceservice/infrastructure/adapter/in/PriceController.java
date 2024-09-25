@@ -1,6 +1,5 @@
 package com.jeparca.inditex.priceservice.infrastructure.adapter.in;
 
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,7 @@ public class PriceController implements PricesApi {
 	private final GetProductPriceUseCase getProductPriceUseCase;
 	
 	@Override
-	public ResponseEntity<PriceDTO> getPrice(OffsetDateTime applicationDate, BigDecimal brandId, BigDecimal productId) {
+	public ResponseEntity<PriceDTO> getPrice(OffsetDateTime applicationDate, Long brandId, Long productId) {
 		return ResponseEntity.ok(getProductPriceUseCase.getProductPriceByBrandAndProductIdAndApplicationDate(brandId.longValue(), productId.longValue(), applicationDate));
 	} 
 	

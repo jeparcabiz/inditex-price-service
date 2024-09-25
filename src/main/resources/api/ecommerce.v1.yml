@@ -33,14 +33,14 @@ paths:
           description: Brand ID to get price of product
           required: true
           schema:
-            type: number
+            type: integer
             format: int64
         - name: productId
           in: query
           description: Product ID to get price
           required: true
           schema:
-            type: number
+            type: integer
             format: int64
       responses:
         '200':
