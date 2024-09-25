@@ -7,13 +7,13 @@ info:
     email: jesus.pc.bt@gmail.com
   version: v1
 servers:
-  - url: http://localhost:8080/api/v1/
+  - url: http://localhost:8080
     description: Local environment
 tags:
   - name: prices
     description: Everything about article's price
 paths:
-  /prices:
+  /v1/prices:
     get:
       tags:
         - prices

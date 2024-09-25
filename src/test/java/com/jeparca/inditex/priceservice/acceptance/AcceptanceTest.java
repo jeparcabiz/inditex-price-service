@@ -24,7 +24,7 @@ import io.restassured.response.Response;
 @CucumberContextConfiguration
 public class AcceptanceTest {
 
-	private final static String PRICES_ENDPOINT = "/prices";
+	private final static String PRICES_V1_ENDPOINT = "/v1/prices";
 	private final static String APPLICATION_DATE_QUERY_PARAM_NAME = "applicationDate";
 	private final static String BRAND_ID_QUERY_PARAM_NAME = "brandId";
 	private final static String ARTICLE_ID_QUERY_PARAM_NAME = "articleId";
@@ -66,7 +66,7 @@ public class AcceptanceTest {
 		String applicationDate = DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.applicationDate);
 		Response response = given().queryParams(APPLICATION_DATE_QUERY_PARAM_NAME, applicationDate,
 				BRAND_ID_QUERY_PARAM_NAME, this.brandId, ARTICLE_ID_QUERY_PARAM_NAME, this.articleId).when()
-				.get(PRICES_ENDPOINT);
+				.get(PRICES_V1_ENDPOINT);
 		this.statusCode = response.statusCode();
 		if(this.statusCode == HttpStatus.OK.value()) {
 			this.price = response.getBody().as(PriceDTO.class);
