@@ -78,9 +78,9 @@ public class AcceptanceTest {
 		assertEquals(statusCode, this.statusCode);
 	}
 	
-	@Then("the price returned should be {float}")
-	public void price_should_be(Float price) throws Exception {
-		assertEquals(price.doubleValue(), this.price.getPrice());
+	@Then("the price returned should be {double}")
+	public void price_should_be(Double price) throws Exception {
+		assertEquals(price, this.price.getPrice());
 	}
 	
 	@Then("the currency should be {string}")
