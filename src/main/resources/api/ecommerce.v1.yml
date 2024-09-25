@@ -5,7 +5,7 @@ info:
     This is a sample microservice to get price of articles
   contact:
     email: jesus.pc.bt@gmail.com
-  version: 1.0.0
+  version: v1
 servers:
   - url: http://localhost:8080/api/v1/
     description: Local environment
