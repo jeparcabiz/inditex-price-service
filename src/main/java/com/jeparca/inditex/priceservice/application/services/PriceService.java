@@ -1,10 +1,12 @@
 package com.jeparca.inditex.priceservice.application.services;
 
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.jeparca.inditex.priceservice.application.exceptions.NotFoundException;
 import com.jeparca.inditex.priceservice.application.mappers.PriceMapper;
 import com.jeparca.inditex.priceservice.application.port.in.GetProductPriceUseCase;
 import com.jeparca.inditex.priceservice.domain.model.ProductPrice;
@@ -25,6 +27,10 @@ public class PriceService implements GetProductPriceUseCase {
 			OffsetDateTime applicationDate) {
 		
 		Optional<ProductPrice> productPrice = productPriceRepository.getApplicablePrice(applicationDate, brandId, productId);
+		
+		if(productPrice.isEmpty()) {
+			throw new NotFoundException(productId, brandId, DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(applicationDate));
+		}
 		
 		return priceMapper.fromProductPriceToPriceDto(productPrice.get());
 	}

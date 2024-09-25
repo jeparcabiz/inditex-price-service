@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
+import com.jeparca.inditex.priceservice.model.v1.ErrorDTO;
 import com.jeparca.inditex.priceservice.model.v1.PriceDTO;
 
 import io.cucumber.java.Before;
@@ -40,6 +41,7 @@ public class AcceptanceTest {
 	// Response
 	private int statusCode;
 	private PriceDTO price;
+	private ErrorDTO error;
 
 	@Before
 	public void setup() {
@@ -70,6 +72,8 @@ public class AcceptanceTest {
 		this.statusCode = response.statusCode();
 		if(this.statusCode == HttpStatus.OK.value()) {
 			this.price = response.getBody().as(PriceDTO.class);
+		} else {
+			this.error = response.getBody().as(ErrorDTO.class);
 		}
 	}
 	
@@ -111,6 +115,11 @@ public class AcceptanceTest {
 	@Then("the end date should be {timestamp}")
 	public void end_date_should_be(OffsetDateTime endDate) throws Exception {
 		assertEquals(endDate, this.price.getEndDate());
+	}
+	
+	@Then("the error message should be {string}")
+	public void error_message_should_be(String errorMessage) throws Exception {
+		assertEquals(errorMessage, this.error.getMessage());
 	}
 
 }

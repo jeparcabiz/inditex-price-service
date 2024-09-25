@@ -12,5 +12,6 @@
 	"useSpringBoot3": true,
 	"interfaceOnly": true,
 	"useSwaggerUI": true,
-	"hideGenerationTimestamp": true
+	"hideGenerationTimestamp": true,
+	"additionalModelTypeAnnotations": "@lombok.Builder"
 }
