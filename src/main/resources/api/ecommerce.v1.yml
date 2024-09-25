@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Inditex eCommerce Price Service
   description: |-
-    This is a sample microservice to get price of articles
+    This is a sample microservice to get price of products
   contact:
     email: jesus.pc.bt@gmail.com
   version: v1
@@ -11,33 +11,33 @@ servers:
     description: Local environment
 tags:
   - name: prices
-    description: Everything about article's price
+    description: Everything about product's price
 paths:
   /v1/prices:
     get:
       tags:
         - prices
-      summary: Retrieves prices of articles
-      description: Get prices of articles based on application date and brand.
+      summary: Retrieves prices of products
+      description: Get prices of products based on application date and brand.
       operationId: getPrice
       parameters:
         - name: applicationDate
           in: query
-          description: Application date to get price of article
+          description: Application date to get price of product
           required: true
           schema:
             type: string
             format: date-time
         - name: brandId
           in: query
-          description: Brand ID to get price of article
+          description: Brand ID to get price of product
           required: true
           schema:
             type: number
             format: int64
-        - name: articleId
+        - name: productId
           in: query
-          description: Article ID to get price
+          description: Product ID to get price
           required: true
           schema:
             type: number

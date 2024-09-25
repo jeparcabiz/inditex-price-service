@@ -27,7 +27,7 @@ public class AcceptanceTest {
 	private final static String PRICES_V1_ENDPOINT = "/v1/prices";
 	private final static String APPLICATION_DATE_QUERY_PARAM_NAME = "applicationDate";
 	private final static String BRAND_ID_QUERY_PARAM_NAME = "brandId";
-	private final static String ARTICLE_ID_QUERY_PARAM_NAME = "articleId";
+	private final static String PRODUCT_ID_QUERY_PARAM_NAME = "productId";
 
 	@LocalServerPort
 	private Integer port;
@@ -35,7 +35,7 @@ public class AcceptanceTest {
 	// Request parameters
 	private OffsetDateTime applicationDate;
 	private Integer brandId;
-	private Integer articleId;
+	private Integer productId;
 
 	// Response
 	private int statusCode;
@@ -56,16 +56,16 @@ public class AcceptanceTest {
 		this.brandId = brandId;
 	}
 
-	@Given("the article id is {int}")
-	public void article_id_is(Integer articleId) {
-		this.articleId = articleId;
+	@Given("the product id is {int}")
+	public void product_id_is(Integer productId) {
+		this.productId = productId;
 	}
 
-	@When("request price of article")
+	@When("request price of product")
 	public void request_price() {
 		String applicationDate = DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.applicationDate);
 		Response response = given().queryParams(APPLICATION_DATE_QUERY_PARAM_NAME, applicationDate,
-				BRAND_ID_QUERY_PARAM_NAME, this.brandId, ARTICLE_ID_QUERY_PARAM_NAME, this.articleId).when()
+				BRAND_ID_QUERY_PARAM_NAME, this.brandId, PRODUCT_ID_QUERY_PARAM_NAME, this.productId).when()
 				.get(PRICES_V1_ENDPOINT);
 		this.statusCode = response.statusCode();
 		if(this.statusCode == HttpStatus.OK.value()) {
@@ -85,22 +85,22 @@ public class AcceptanceTest {
 	
 	@Then("the currency should be {string}")
 	public void currency_should_be(String currency) throws Exception {
-		assertEquals(currency, this.price.getCurrency());
+		assertEquals(currency, this.price.getCurrency().getValue());
 	}
 	
 	@Then("the brand id should be {int}")
 	public void brand_id_should_be(Integer brandId) throws Exception {
-		assertEquals(brandId, this.price.getBrandId());
+		assertEquals(brandId, this.price.getBrandId().intValue());
 	}
 	
-	@Then("the article id should be {int}")
-	public void article_id_should_be(Integer articleId) throws Exception {
-		assertEquals(articleId, this.price.getArticleId());
+	@Then("the product id should be {int}")
+	public void product_id_should_be(Integer productId) throws Exception {
+		assertEquals(productId, this.price.getProductId().intValue());
 	}
 	
-	@Then("the price list should be {int}")
-	public void price_list_should_be(Integer priceList) throws Exception {
-		assertEquals(priceList, this.price.getPriceList());
+	@Then("the price list should be {long}")
+	public void price_list_should_be(Long priceList) throws Exception {
+		assertEquals(priceList, this.price.getPriceId());
 	}
 	
 	@Then("the start date should be {timestamp}")
