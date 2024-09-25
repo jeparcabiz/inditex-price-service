@@ -76,3 +76,20 @@ Feature: List prices of products
 		When request price of product
 		Then status code should be 404
 			And the error message should be 'No price was found for product 35453 of brand 1 in application date 2020-06-14T10:00:00Z'
+
+	Scenario: Retrieving price of product of non existing brand
+		Given the application date is 2020-06-14T10:00:00Z
+			And the brand id is 348
+			And the product id is 35455
+		When request price of product
+		Then status code should be 404
+			And the error message should be 'No price was found for product 35455 of brand 348 in application date 2020-06-14T10:00:00Z'
+
+	Scenario: Retrieving price of product with no data of prices
+		Given the application date is 2020-06-13T10:00:00Z
+			And the brand id is 1
+			And the product id is 35455
+		When request price of product
+		Then status code should be 404
+			And the error message should be 'No price was found for product 35455 of brand 1 in application date 2020-06-13T10:00:00Z'
+	
