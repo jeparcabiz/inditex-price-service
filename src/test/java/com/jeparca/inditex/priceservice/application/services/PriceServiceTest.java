@@ -1,5 +1,6 @@
 package com.jeparca.inditex.priceservice.application.services;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -41,10 +42,11 @@ public class PriceServiceTest {
 				.willReturn(Optional.of(mock(ProductPrice.class)));
 		given(priceMapper.fromProductPriceToPriceDto(any())).willReturn(mock(PriceDTO.class));
 
-		priceService.getProductPriceByBrandAndProductIdAndApplicationDate(3L, 141L, OffsetDateTime.now());
+		PriceDTO price = priceService.getProductPriceByBrandAndProductIdAndApplicationDate(3L, 141L, OffsetDateTime.now());
 
 		verify(productPriceRepository, times(1)).getApplicablePrice(any(), any(), any());
 		verify(priceMapper, times(1)).fromProductPriceToPriceDto(any());
+		assertNotNull(price);
 	}
 
 	@Test
