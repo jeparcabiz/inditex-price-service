@@ -2,9 +2,11 @@ package com.jeparca.inditex.priceservice.domain.model;
 
 import java.time.OffsetDateTime;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class ProductPrice {
 
 	private Long id;
