@@ -2,7 +2,7 @@
 
 ## Description
 
-Inditex eCommerce Price application, developed using Spring Boot, Hexagonal Architecture and DDD. This app use H2 database and Docker to configure developer environment.
+Inditex eCommerce Price application, developed using Spring Boot, Hexagonal Architecture and TDD. This app use H2 database and Docker to configure developer environment.
 
 ## Requirements
 
