@@ -1,0 +1,69 @@
+openapi: 3.0.3
+info:
+  title: Inditex eCommerce Price Service
+  description: |-
+    This is a sample microservice to get price of products
+  contact:
+    email: jesus.pc.bt@gmail.com
+  version: v1
+servers:
+  - url: http://localhost:8080
+    description: Local environment
+tags:
+  - name: prices
+    description: Everything about product's price
+paths:
+  /v1/prices:
+    get:
+      tags:
+        - prices
+      summary: Retrieves prices of products
+      description: Get prices of products based on application date and brand.
+      operationId: getPrice
+      parameters:
+        - name: applicationDate
+          in: query
+          description: Application date to get price of product
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: brandId
+          in: query
+          description: Brand ID to get price of product
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: productId
+          in: query
+          description: Product ID to get price
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './model.v1/price.yml#/Price'          
+        '400':
+          description: Invalid status
+          content:
+            application/json:
+              schema:
+                $ref: './model.v1/error.yml#/Error'
+        '404':
+          description: Not found status
+          content:
+            application/json:
+              schema:
+                $ref: './model.v1/error.yml#/Error'
+        '500':
+          description: Internal server error status
+          content:
+            application/json:
+              schema:
+                $ref: './model.v1/error.yml#/Error' 

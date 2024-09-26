@@ -1,0 +1,14 @@
+Error:
+  type: object
+  properties:
+    id:
+      type: string
+      description: ID of error
+      example: e25795f4-8bd2-4e82-ac5a-ffd921aad4f9
+    timestamp:
+      type: string
+      format: date-time
+      example: 2024-09-24T15:00:05Z
+    message:
+      type: string
+      example: Price not found
